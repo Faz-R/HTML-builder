@@ -15,15 +15,13 @@ stdin.on('data', data => {
     process.exit();
   }else{
     fs.appendFile(
-  path.join(__dirname, 'notes.txt'),
-  data,
-  err => {
+      path.join(__dirname, 'notes.txt'),
+      data,
+      err => {
       if (err) throw err;
       console.log('Данные внесены');
+    })
   }
-)
-  }
-
 });
 
 process.on('SIGINT', () => {console.log('Спасибо, что воспользовались программой!');
