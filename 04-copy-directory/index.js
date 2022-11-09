@@ -2,10 +2,20 @@ const fs = require('fs');
 const path = require('path');
 
 
-
-fs.mkdir(path.join(__dirname, 'files-copy'), { recursive: true }, err => {
-  if (err) throw err;
-});
+fs.readdir(path.join(__dirname, "files-copy"), { withFileTypes: true }, (err, newFile) => {
+    if (err) {
+      fs.mkdir(path.join(__dirname, "files-copy"), (err) => {
+        if (err) { console.log(err);}
+      });
+    } else {
+      newFile.forEach((newFile) => {
+        fs.unlink(path.join(__dirname, "files-copy", newFile.name), (err) => {
+          if (err) console.log(err);
+        });
+      });
+    }
+  }
+);
 
 
 fs.readdir(path.join(__dirname, 'files'),{ withFileTypes: true }, (err, files) => {
